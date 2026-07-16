@@ -374,6 +374,25 @@ y_pred = (pred_multi(tree, X_test) >= 0.5).astype(int)
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
+# ROC AUC
+from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+# Decision tree probabilities
+p_tree = pred_multi(tree, X_test)
+fpr_tree, tpr_tree, _ = roc_curve(y_test, p_tree)
+auc_tree = roc_auc_score(y_test, p_tree)
+
+plt.figure(figsize=(6, 6))
+plt.plot(fpr_tree, tpr_tree, label=f'Decision Tree')
+plt.plot([0, 1], [0, 1], '--', color='gray', label='Random Guess')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.legend()
+plt.grid(alpha=0.3)
+plt.show()
+
 
 # Function to calculate expected loss
 def expected_loss_tree(loan_features, tree, recovery_rate=0.1):
