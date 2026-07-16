@@ -375,8 +375,6 @@ print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
 # ROC AUC
-from sklearn.metrics import roc_curve, roc_auc_score
-import matplotlib.pyplot as plt
 
 # Decision tree probabilities
 p_tree = pred_multi(tree, X_test)
